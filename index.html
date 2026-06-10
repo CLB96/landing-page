@@ -966,6 +966,56 @@ body{
   .card-badge{top:16px;right:16px;font-size:9px;padding:5px 10px}
 }
 
+/* === CARD MANAGER === */
+.modal-content{max-height:90vh;overflow-y:auto}
+.cm-list{display:flex;flex-direction:column;gap:8px;max-height:50vh;overflow-y:auto;padding-right:4px;margin-bottom:8px}
+.cm-list::-webkit-scrollbar{width:4px}
+.cm-list::-webkit-scrollbar-track{background:transparent}
+.cm-list::-webkit-scrollbar-thumb{background:var(--border-bright);border-radius:4px}
+.cm-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);transition:all .2s}
+.cm-row:hover{border-color:var(--border-bright);background:var(--bg-card-hover)}
+.cm-icon{font-size:22px;width:36px;text-align:center;flex-shrink:0}
+.cm-info{flex:1;min-width:0}
+.cm-name{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cm-chips{display:flex;gap:5px;margin-top:3px;flex-wrap:wrap}
+.cm-chip{font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px;text-transform:uppercase;letter-spacing:.04em}
+.cm-chip-active{background:rgba(var(--green-glow),.15);color:var(--green)}
+.cm-chip-hold{background:rgba(255,255,255,.08);color:var(--text-muted)}
+.cm-chip-new{background:linear-gradient(135deg,var(--red),var(--amber));color:#fff}
+.cm-chip-updated{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff}
+.cm-actions{display:flex;gap:5px;flex-shrink:0}
+.cm-btn{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-dim);cursor:pointer;display:grid;place-items:center;font-size:13px;transition:all .2s}
+.cm-btn:hover{border-color:var(--border-bright);color:var(--text);background:var(--bg-card-hover)}
+.cm-btn-del:hover{border-color:var(--red)!important;color:var(--red)!important}
+.cm-add-btn{width:100%;height:42px;border-radius:12px;border:1px dashed var(--border-bright);background:rgba(var(--blue-glow),.05);color:var(--blue-light);font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
+.cm-add-btn:hover{background:rgba(var(--blue-glow),.12)}
+.cm-export-btn{width:100%;height:42px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-dim);font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
+.cm-export-btn:hover{border-color:var(--green);color:var(--green);background:rgba(var(--green-glow),.06)}
+.ef-scroll{overflow-y:auto;max-height:calc(80vh - 160px);padding-right:4px}
+.ef-scroll::-webkit-scrollbar{width:4px}
+.ef-scroll::-webkit-scrollbar-track{background:transparent}
+.ef-scroll::-webkit-scrollbar-thumb{background:var(--border-bright);border-radius:4px}
+.ef-back{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--text-dim);cursor:pointer;margin-bottom:16px;transition:color .2s;width:fit-content;background:none;border:none}
+.ef-back:hover{color:var(--text)}
+.ef-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.ef-full{grid-column:1/-1}
+.ef-label{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+.ef-input{width:100%;height:40px;padding:0 12px;border-radius:10px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font:inherit;font-size:13px;transition:all .2s}
+.ef-input:focus{outline:none;border-color:var(--border-bright);background:var(--bg-card-hover);box-shadow:0 0 0 3px rgba(var(--blue-glow),.08)}
+.ef-textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font:inherit;font-size:13px;resize:vertical;min-height:68px;transition:all .2s}
+.ef-textarea:focus{outline:none;border-color:var(--border-bright);background:var(--bg-card-hover);box-shadow:0 0 0 3px rgba(var(--blue-glow),.08)}
+.emoji-picker{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;padding:8px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card)}
+.emoji-opt{height:32px;border-radius:7px;border:1px solid transparent;background:transparent;font-size:17px;cursor:pointer;display:grid;place-items:center;transition:all .15s}
+.emoji-opt:hover{background:rgba(var(--blue-glow),.1);border-color:var(--border-bright)}
+.emoji-opt.selected{background:rgba(var(--blue-glow),.15);border-color:var(--border-bright)}
+.sel-row{display:flex;gap:8px}
+.sel-opt{flex:1;height:36px;border-radius:9px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-dim);font:inherit;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
+.sel-opt.selected{border-color:var(--border-bright);color:var(--text)}
+.sel-opt-new.selected{background:rgba(239,91,103,.12);border-color:var(--amber);color:var(--amber)}
+.sel-opt-updated.selected{background:rgba(var(--blue-glow),.12);border-color:var(--blue-light);color:var(--blue-light)}
+.sel-opt-active.selected{background:rgba(var(--green-glow),.12);border-color:var(--green);color:var(--green)}
+.sel-opt-hold.selected{background:rgba(255,255,255,.07);border-color:var(--text-muted);color:var(--text)}
+
 /* Landscape mode */
 @media (max-height:500px) and (orientation:landscape){
   .hero{margin-bottom:30px}
@@ -1084,157 +1134,14 @@ body{
       <p class="section-subtitle" id="sectionSubtitle">Select a tool to get started</p>
     </div>
     
-    <div class="tools-grid">
-      
-      <!-- Gantt Tracker -->
-      <a href="https://gantt-tracker-cjlb.netlify.app/" target="_blank" class="tool-card">
-        <div class="card-header">
-          <div class="card-icon-wrapper">📊</div>
-          <h3 class="card-title" data-en="Gantt Tracker" data-es="Gantt Tracker">Gantt Tracker</h3>
-          <p class="card-description" data-en="Visual project tracking with timeline management, task dependencies, and progress monitoring." data-es="Seguimiento visual de proyectos con gestión de cronogramas, dependencias de tareas y monitoreo de progreso.">Seguimiento visual de proyectos con gestión de cronogramas, dependencias de tareas y monitoreo de progreso.</p>
-        </div>
-        <div class="card-footer">
-          <div class="card-status">
-            <span class="status-dot"></span>
-            <span data-en="Active" data-es="Activo">Activo</span>
-          </div>
-          <div class="card-arrow">→</div>
-        </div>
-      </a>
-
-      <!-- GapCheck Analysis -->
-      <a href="https://gapcheckcjlb.netlify.app/" target="_blank" class="tool-card">
-        <div class="card-badge" data-en="New" data-es="Nuevo">Nuevo</div>
-        <div class="card-header">
-          <div class="card-icon-wrapper">📏</div>
-          <h3 class="card-title" data-en="GapCheck Analysis" data-es="Análisis GapCheck">Análisis GapCheck</h3>
-          <p class="card-description" data-en="Advanced measurement analysis with tolerance comparisons, statistical validation, and comprehensive reporting." data-es="Análisis avanzado de mediciones con comparaciones de tolerancias, validación estadística y reportes completos.">Análisis avanzado de mediciones con comparaciones de tolerancias, validación estadística y reportes completos.</p>
-        </div>
-        <div class="card-footer">
-          <div class="card-status">
-            <span class="status-dot"></span>
-            <span data-en="Active" data-es="Activo">Activo</span>
-          </div>
-          <div class="card-arrow">→</div>
-        </div>
-      </a>
-
-      <!-- Bondline Thermal -->
-      <a href="https://bondlinecjlb.netlify.app/" target="_blank" class="tool-card">
-        <div class="card-header">
-          <div class="card-icon-wrapper">🌡️</div>
-          <h3 class="card-title" data-en="Bondline Thermal" data-es="Bondline Térmica">Bondline Térmica</h3>
-          <p class="card-description" data-en="Thermal analysis and adhesive activation monitoring with temperature profiling and process validation." data-es="Análisis térmico y monitoreo de activación de adhesivos con perfiles de temperatura y validación de procesos.">Análisis térmico y monitoreo de activación de adhesivos con perfiles de temperatura y validación de procesos.</p>
-        </div>
-        <div class="card-footer">
-          <div class="card-status">
-            <span class="status-dot"></span>
-            <span data-en="Active" data-es="Activo">Activo</span>
-          </div>
-          <div class="card-arrow">→</div>
-        </div>
-      </a>
-
-      <!-- TFU Tracker -->
-      <div class="tool-card inactive">
-        <div class="card-header">
-          <div class="card-icon-wrapper">✓</div>
-          <h3 class="card-title" data-en="TFU Tracker" data-es="TFU Tracker">TFU Tracker</h3>
-          <p class="card-description" data-en="Tool follow-up system for supplier validation, design approval, and equipment tracking across phases." data-es="Sistema de seguimiento de herramientas para validación de proveedores, aprobación de diseño y rastreo de equipos.">Sistema de seguimiento de herramientas para validación de proveedores, aprobación de diseño y rastreo de equipos.</p>
-        </div>
-        <div class="card-footer">
-          <div class="card-status">
-            <span data-en="Coming Soon" data-es="Próximamente">Próximamente</span>
-          </div>
-          <div class="card-arrow">→</div>
-        </div>
-      </div>
-
-      <!-- Placeholder -->
-      <div class="tool-card inactive">
-        <div class="card-header">
-          <div class="card-icon-wrapper">⏳</div>
-          <h3 class="card-title" data-en="More Tools" data-es="Más Herramientas">Más Herramientas</h3>
-          <p class="card-description" data-en="Additional engineering tools and utilities are currently in development. Stay tuned for updates." data-es="Herramientas de ingeniería adicionales y utilidades están actualmente en desarrollo. Mantente atento a las actualizaciones.">Herramientas de ingeniería adicionales y utilidades están actualmente en desarrollo. Mantente atento a las actualizaciones.</p>
-        </div>
-        <div class="card-footer">
-          <div class="card-status">
-            <span data-en="In Development" data-es="En Desarrollo">En Desarrollo</span>
-          </div>
-          <div class="card-arrow">→</div>
-        </div>
-      </div>
-
-      <!-- Placeholder -->
-      <div class="tool-card inactive">
-        <div class="card-header">
-          <div class="card-icon-wrapper">🔧</div>
-          <h3 class="card-title" data-en="Future Tool" data-es="Herramienta Futura">Herramienta Futura</h3>
-          <p class="card-description" data-en="Exploring new capabilities to enhance your engineering workflow. More information coming soon." data-es="Explorando nuevas capacidades para mejorar tu flujo de trabajo de ingeniería. Más información próximamente.">Explorando nuevas capacidades para mejorar tu flujo de trabajo de ingeniería. Más información próximamente.</p>
-        </div>
-        <div class="card-footer">
-          <div class="card-status">
-            <span data-en="Planned" data-es="Planificado">Planificado</span>
-          </div>
-          <div class="card-arrow">→</div>
-        </div>
-      </div>
-
-    </div>
+    <div class="tools-grid" id="toolsGrid"></div>
   </section>
 
 </main>
 
 <!-- Admin Modal -->
 <div class="admin-modal" id="adminModal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2 class="modal-title" data-en="Tool Links Editor" data-es="Editor de Enlaces">Editor de Enlaces</h2>
-      <button class="modal-close" onclick="closeAdminModal()">×</button>
-    </div>
-    <div class="link-editor">
-      <div class="link-item">
-        <label class="link-label">
-          <span class="link-label-icon">📊</span>
-          <span>Gantt Tracker</span>
-        </label>
-        <input 
-          type="url" 
-          class="link-input" 
-          id="linkGantt" 
-          placeholder="https://..."
-        />
-      </div>
-      <div class="link-item">
-        <label class="link-label">
-          <span class="link-label-icon">📏</span>
-          <span>GapCheck Analysis</span>
-        </label>
-        <input 
-          type="url" 
-          class="link-input" 
-          id="linkGapcheck" 
-          placeholder="https://..."
-        />
-      </div>
-      <div class="link-item">
-        <label class="link-label">
-          <span class="link-label-icon">🌡️</span>
-          <span>Bondline Thermal</span>
-        </label>
-        <input 
-          type="url" 
-          class="link-input" 
-          id="linkBondline" 
-          placeholder="https://..."
-        />
-      </div>
-    </div>
-    <div class="modal-actions">
-      <button class="modal-btn" onclick="closeAdminModal()" data-en="Cancel" data-es="Cancelar">Cancelar</button>
-      <button class="modal-btn modal-btn-primary" onclick="saveLinks()" data-en="Save Changes" data-es="Guardar Cambios">Guardar Cambios</button>
-    </div>
-  </div>
+  <div class="modal-content" id="modalContent"></div>
 </div>
 
 <!-- Footer -->
@@ -1248,126 +1155,160 @@ body{
 </footer>
 
 <script>
-// Translations
+// === TRANSLATIONS ===
 const t={
-  es:{
-    brandTag:'Ingeniería de Procesos',
-    heroTitle:'Caja de Herramientas<br>de Ingeniería de Procesos',
-    sectionTitle:'Herramientas Disponibles',
-    sectionSubtitle:'Selecciona una herramienta para comenzar',
-    footerText:'Desarrollado por'
-  },
-  en:{
-    brandTag:'Process Engineering',
-    heroTitle:'Process Engineering<br>Toolbox',
-    sectionTitle:'Available Tools',
-    sectionSubtitle:'Select a tool to get started',
-    footerText:'Engineered by'
-  }
+  es:{brandTag:'Ingeniería de Procesos',heroTitle:'Caja de Herramientas<br>de Ingeniería de Procesos',sectionTitle:'Herramientas Disponibles',sectionSubtitle:'Selecciona una herramienta para comenzar',footerText:'Desarrollado por'},
+  en:{brandTag:'Process Engineering',heroTitle:'Process Engineering<br>Toolbox',sectionTitle:'Available Tools',sectionSubtitle:'Select a tool to get started',footerText:'Engineered by'}
 };
+const months={es:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],en:['January','February','March','April','May','June','July','August','September','October','November','December']};
+const days={es:['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],en:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']};
 
-const months={
-  es:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-  en:['January','February','March','April','May','June','July','August','September','October','November','December']
-};
-
-const days={
-  es:['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
-  en:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
-};
-
-// Admin password (change this to your desired password)
 const ADMIN_PASSWORD='cjlb2026';
-
-// Default links
-const defaultLinks={
-  gantt:'https://gantt-tracker-cjlb.netlify.app/',
-  gapcheck:'https://gapcheckcjlb.netlify.app/',
-  bondline:'https://bondlinecjlb.netlify.app/'
-};
-
 let lang=localStorage.getItem('lang')||'es';
 let theme=localStorage.getItem('theme')||'dark';
 
-// Load custom links from localStorage or use defaults
-function getLinks(){
-  const stored=localStorage.getItem('toolLinks');
-  return stored?JSON.parse(stored):defaultLinks;
-}
+// === CARD DATA ===
+const CARDS_KEY='toolCards';
+const EMOJIS=['📊','📏','🌡️','✅','⏳','🔧','📐','🔬','⚙️','🔩','📈','📋','🛠️','⚗️','💡','🔌','🖥️','📡','🧪','🧮','📌','🗂️','🏗️','🔑','🚀','📉','🗃️','📁','🔭','⚡'];
 
-function saveLinksToStorage(links){
-  localStorage.setItem('toolLinks',JSON.stringify(links));
-}
-
-// Apply links to cards
-function applyLinks(){
-  const links=getLinks();
-  const cards=document.querySelectorAll('.tool-card');
-  cards.forEach(card=>{
-    const href=card.getAttribute('href');
-    if(href&&href.includes('Gantt')){
-      card.href=links.gantt;
-    }else if(href&&href.includes('Gapcheck')){
-      card.href=links.gapcheck;
-    }else if(href&&href.includes('Bondline')){
-      card.href=links.bondline;
-    }
-  });
-}
-
-// Update date
-function updateDate(){
-  const now=new Date();
-  const day=now.getDate();
-  const month=now.getMonth();
-  const year=now.getFullYear();
-  const weekday=now.getDay();
-  
-  const dateStr=lang==='es'
-    ?`${days.es[weekday]}, ${day} de ${months.es[month]} ${year}`
-    :`${days.en[weekday]}, ${months.en[month]} ${day}, ${year}`;
-  
-  document.getElementById('currentDate').textContent=dateStr;
-}
-
-// Settings menu
-function toggleSettings(){
-  const btn=document.getElementById('hamburgerBtn');
-  const menu=document.getElementById('settingsMenu');
-  btn.classList.toggle('active');
-  menu.classList.toggle('active');
-}
-
-// Close menu when clicking outside
-document.addEventListener('click',e=>{
-  const btn=document.getElementById('hamburgerBtn');
-  const menu=document.getElementById('settingsMenu');
-  const modal=document.getElementById('adminModal');
-  if(!btn.contains(e.target)&&!menu.contains(e.target)&&!modal.contains(e.target)){
-    btn.classList.remove('active');
-    menu.classList.remove('active');
+// __CARDS_START__
+const DEFAULT_CARDS=[
+  {
+    "id": "gantt",
+    "icon": "📊",
+    "nameEs": "Gantt Tracker",
+    "nameEn": "Gantt Tracker",
+    "descEs": "Seguimiento visual de proyectos con gestión de cronogramas, dependencias de tareas y monitoreo de progreso.",
+    "descEn": "Visual project tracking with timeline management, task dependencies, and progress monitoring.",
+    "badge": null,
+    "url": "https://gantt-tracker-cjlb.netlify.app/",
+    "status": "active",
+    "holdLabelEs": "Próximamente",
+    "holdLabelEn": "Coming Soon"
+  },
+  {
+    "id": "gapcheck",
+    "icon": "📏",
+    "nameEs": "Análisis GapCheck",
+    "nameEn": "GapCheck Analysis",
+    "descEs": "Análisis avanzado de mediciones con comparaciones de tolerancias, validación estadística y reportes completos.",
+    "descEn": "Advanced measurement analysis with tolerance comparisons, statistical validation, and comprehensive reporting.",
+    "badge": null,
+    "url": "https://gapcheckcjlb.netlify.app/",
+    "status": "active",
+    "holdLabelEs": "Próximamente",
+    "holdLabelEn": "Coming Soon"
+  },
+  {
+    "id": "bondline",
+    "icon": "🌡️",
+    "nameEs": "Bondline Térmica",
+    "nameEn": "Bondline Thermal",
+    "descEs": "Análisis térmico y monitoreo de activación de adhesivos con perfiles de temperatura y validación de procesos.",
+    "descEn": "Thermal analysis and adhesive activation monitoring with temperature profiling and process validation.",
+    "badge": null,
+    "url": "https://bondlinecjlb.netlify.app/",
+    "status": "active",
+    "holdLabelEs": "Próximamente",
+    "holdLabelEn": "Coming Soon"
+  },
+  {
+    "id": "tfu",
+    "icon": "🧮",
+    "nameEs": "CapaFlow",
+    "nameEn": "CapaFlow",
+    "descEs": "Análisis estadístico en el navegador.\nSin servidores · Sin Minitab · 100% gratuito",
+    "descEn": "Statistical analysis in your browser.\nNo servers · No Minitab · 100% free",
+    "badge": "new",
+    "url": "https://capaflowv1.netlify.app/",
+    "status": "active",
+    "holdLabelEs": "Próximamente",
+    "holdLabelEn": "Coming Soon"
+  },
+  {
+    "id": "more",
+    "icon": "📐",
+    "nameEs": "VectoriZr",
+    "nameEn": "VectoriZr",
+    "descEs": "Herramienta para digitalizar/vectorizar dibujos o patrones de corte de forma sencilla.",
+    "descEn": "Digitalization/Vectoring tool to make drawings or cut patterns easier.",
+    "badge": "new",
+    "url": "https://vectorizr.netlify.app/",
+    "status": "active",
+    "holdLabelEs": "En Desarrollo",
+    "holdLabelEn": "In Development"
+  },
+  {
+    "id": "future",
+    "icon": "🔧",
+    "nameEs": "Herramienta Futura",
+    "nameEn": "Future Tool",
+    "descEs": "Explorando nuevas capacidades para mejorar tu flujo de trabajo de ingeniería. Más información próximamente.",
+    "descEn": "Exploring new capabilities to enhance your engineering workflow. More information coming soon.",
+    "badge": null,
+    "url": "",
+    "status": "hold",
+    "holdLabelEs": "Planificado",
+    "holdLabelEn": "Planned"
   }
+];
+// __CARDS_END__
+
+function getCards(){
+  const s=localStorage.getItem(CARDS_KEY);
+  if(s){try{return JSON.parse(s)}catch(e){}}
+  return DEFAULT_CARDS.map(c=>Object.assign({},c));
+}
+function saveCards(cards){localStorage.setItem(CARDS_KEY,JSON.stringify(cards));}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// === CARD RENDERING ===
+function renderCards(){
+  const cards=getCards();
+  document.getElementById('toolsGrid').innerHTML=cards.map(buildCardHTML).join('');
+}
+
+function buildCardHTML(c){
+  const ok=c.status==='active'&&c.url;
+  const tag=ok?'a':'div';
+  const href=ok?` href="${esc(c.url)}" target="_blank"`:'';
+  const inactive=ok?'':' inactive';
+  const name=esc(lang==='es'?c.nameEs:c.nameEn);
+  const desc=esc(lang==='es'?c.descEs:c.descEn);
+  let badge='';
+  if(c.badge==='new') badge=`<div class="card-badge">${lang==='es'?'Nuevo':'New'}</div>`;
+  else if(c.badge==='updated') badge=`<div class="card-badge" style="background:linear-gradient(135deg,var(--blue),var(--cyan))">${lang==='es'?'Actualizado':'Updated'}</div>`;
+  const statusHTML=ok
+    ?`<span class="status-dot"></span><span>${lang==='es'?'Activo':'Active'}</span>`
+    :`<span>${esc(lang==='es'?(c.holdLabelEs||'Próximamente'):(c.holdLabelEn||'Coming Soon'))}</span>`;
+  return `<${tag}${href} class="tool-card${inactive}">${badge}<div class="card-header"><div class="card-icon-wrapper">${c.icon}</div><h3 class="card-title">${name}</h3><p class="card-description">${desc}</p></div><div class="card-footer"><div class="card-status">${statusHTML}</div><div class="card-arrow">→</div></div></${tag}>`;
+}
+
+// === DATE ===
+function updateDate(){
+  const n=new Date(),d=n.getDate(),m=n.getMonth(),y=n.getFullYear(),w=n.getDay();
+  document.getElementById('currentDate').textContent=lang==='es'
+    ?`${days.es[w]}, ${d} de ${months.es[m]} ${y}`
+    :`${days.en[w]}, ${months.en[m]} ${d}, ${y}`;
+}
+
+// === SETTINGS ===
+function toggleSettings(){
+  document.getElementById('hamburgerBtn').classList.toggle('active');
+  document.getElementById('settingsMenu').classList.toggle('active');
+}
+document.addEventListener('click',e=>{
+  const btn=document.getElementById('hamburgerBtn'),menu=document.getElementById('settingsMenu'),modal=document.getElementById('adminModal');
+  if(!btn.contains(e.target)&&!menu.contains(e.target)&&!modal.contains(e.target)){btn.classList.remove('active');menu.classList.remove('active');}
 });
-
-function setLanguage(newLang){
-  lang=newLang;
-  localStorage.setItem('lang',newLang);
-  applyLanguage();
-  updateDate();
-  document.querySelectorAll('[data-lang]').forEach(el=>{
-    el.classList.toggle('active',el.getAttribute('data-lang')===newLang);
-  });
+function setLanguage(l){
+  lang=l;localStorage.setItem('lang',l);applyLanguage();updateDate();
+  document.querySelectorAll('[data-lang]').forEach(el=>el.classList.toggle('active',el.getAttribute('data-lang')===l));
 }
-
-function setTheme(newTheme){
-  theme=newTheme;
-  localStorage.setItem('theme',newTheme);
-  applyTheme();
-  document.querySelectorAll('[data-theme]').forEach(el=>{
-    el.classList.toggle('active',el.getAttribute('data-theme')===newTheme);
-  });
+function setTheme(th){
+  theme=th;localStorage.setItem('theme',th);applyTheme();
+  document.querySelectorAll('[data-theme]').forEach(el=>el.classList.toggle('active',el.getAttribute('data-theme')===th));
 }
-
 function applyLanguage(){
   document.documentElement.lang=lang;
   document.getElementById('brandTag').textContent=t[lang].brandTag;
@@ -1375,85 +1316,186 @@ function applyLanguage(){
   document.getElementById('sectionTitle').textContent=t[lang].sectionTitle;
   document.getElementById('sectionSubtitle').textContent=t[lang].sectionSubtitle;
   document.getElementById('footerText').textContent=t[lang].footerText;
-  
   document.querySelectorAll('[data-en][data-es]').forEach(el=>{
-    const attr=lang==='en'?'data-en':'data-es';
-    if(el.tagName==='P'||el.tagName==='H3'||el.tagName==='SPAN'||el.tagName==='DIV'||el.tagName==='BUTTON'||el.tagName==='H2'){
-      el.textContent=el.getAttribute(attr);
-    }else{
-      el.innerHTML=el.getAttribute(attr);
-    }
+    const a=lang==='en'?'data-en':'data-es';
+    ['P','H3','SPAN','DIV','BUTTON','H2'].includes(el.tagName)?el.textContent=el.getAttribute(a):el.innerHTML=el.getAttribute(a);
   });
+  renderCards();
 }
-
 function applyTheme(){
-  const root=document.documentElement;
-  if(theme==='light'){
-    root.setAttribute('data-theme','light');
-  }else{
-    root.removeAttribute('data-theme');
-  }
+  theme==='light'?document.documentElement.setAttribute('data-theme','light'):document.documentElement.removeAttribute('data-theme');
 }
 
-// Admin functions
+// === ADMIN AUTH ===
 function unlockAdmin(){
-  const password=document.getElementById('adminPassword').value;
-  if(password===ADMIN_PASSWORD){
-    openAdminModal();
-    document.getElementById('adminPassword').value='';
-    toggleSettings(); // Close settings menu
-  }else{
-    alert(lang==='es'?'Contraseña incorrecta':'Incorrect password');
-    document.getElementById('adminPassword').value='';
-  }
+  const pwd=document.getElementById('adminPassword').value;
+  if(pwd===ADMIN_PASSWORD){openAdminModal();document.getElementById('adminPassword').value='';toggleSettings();}
+  else{alert(lang==='es'?'Contraseña incorrecta':'Incorrect password');document.getElementById('adminPassword').value='';}
+}
+function openAdminModal(){document.getElementById('adminModal').classList.add('active');renderAdminList();}
+function closeAdminModal(){document.getElementById('adminModal').classList.remove('active');editingId=null;}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAdminModal();});
+
+// === CARD MANAGER STATE ===
+let editingId=null,selIcon='🔧',selBadge=null,selStatus='active';
+
+// === ADMIN LIST VIEW ===
+function renderAdminList(){
+  editingId=null;
+  const cards=getCards();
+  const rows=cards.map(c=>{
+    const name=esc(lang==='es'?c.nameEs:c.nameEn);
+    const active=c.status==='active';
+    let chips=`<span class="cm-chip ${active?'cm-chip-active':'cm-chip-hold'}">${active?(lang==='es'?'Activo':'Active'):(lang==='es'?'En espera':'On Hold')}</span>`;
+    if(c.badge==='new') chips+=`<span class="cm-chip cm-chip-new">${lang==='es'?'Nuevo':'New'}</span>`;
+    if(c.badge==='updated') chips+=`<span class="cm-chip cm-chip-updated">${lang==='es'?'Actualizado':'Updated'}</span>`;
+    const holdTip=active?(lang==='es'?'Pausar':'Hold'):(lang==='es'?'Activar':'Activate');
+    return `<div class="cm-row">
+      <div class="cm-icon">${c.icon}</div>
+      <div class="cm-info"><div class="cm-name">${name}</div><div class="cm-chips">${chips}</div></div>
+      <div class="cm-actions">
+        <button class="cm-btn" onclick="showCardEdit('${c.id}')" title="${lang==='es'?'Editar':'Edit'}">✏️</button>
+        <button class="cm-btn" onclick="toggleCardHold('${c.id}')" title="${holdTip}">${active?'⏸':'▶'}</button>
+        <button class="cm-btn cm-btn-del" onclick="confirmDeleteCard('${c.id}')" title="${lang==='es'?'Eliminar':'Delete'}">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('modalContent').innerHTML=`
+    <div class="modal-header">
+      <h2 class="modal-title">${lang==='es'?'Gestionar Tarjetas':'Manage Cards'}</h2>
+      <button class="modal-close" onclick="closeAdminModal()">×</button>
+    </div>
+    <div class="cm-list">${rows}</div>
+    <button class="cm-add-btn" onclick="showCardEdit(null)">+ ${lang==='es'?'Agregar tarjeta':'Add card'}</button>
+    <button class="cm-export-btn" onclick="exportHTML()">⬇ ${lang==='es'?'Exportar HTML para Netlify':'Export HTML for Netlify'}</button>`;
 }
 
-function openAdminModal(){
-  const links=getLinks();
-  document.getElementById('linkGantt').value=links.gantt;
-  document.getElementById('linkGapcheck').value=links.gapcheck;
-  document.getElementById('linkBondline').value=links.bondline;
-  document.getElementById('adminModal').classList.add('active');
+// === CARD EDIT FORM ===
+function showCardEdit(id){
+  editingId=id;
+  const c=id?getCards().find(x=>x.id===id):null;
+  selIcon=c?c.icon:'🔧'; selBadge=c?c.badge:null; selStatus=c?c.status:'active';
+
+  const emojiGrid=EMOJIS.map(e=>`<button class="emoji-opt${e===selIcon?' selected':''}" onclick="selectIcon('${e}',this)">${e}</button>`).join('');
+
+  const badgeDefs=[{v:null,l:lang==='es'?'Ninguno':'None',cls:''},{v:'new',l:lang==='es'?'Nuevo':'New',cls:'sel-opt-new'},{v:'updated',l:lang==='es'?'Actualizado':'Updated',cls:'sel-opt-updated'}];
+  const badgeRow=badgeDefs.map(b=>`<button class="sel-opt ${b.cls}${selBadge===b.v?' selected':''}" onclick="selectBadge(${b.v===null?'null':`'${b.v}'`},this)">${b.l}</button>`).join('');
+
+  const statusRow=[{v:'active',l:lang==='es'?'Activo':'Active',cls:'sel-opt-active'},{v:'hold',l:lang==='es'?'En Espera':'On Hold',cls:'sel-opt-hold'}]
+    .map(s=>`<button class="sel-opt ${s.cls}${selStatus===s.v?' selected':''}" onclick="selectStatus('${s.v}',this)">${s.l}</button>`).join('');
+
+  const g=n=>c?esc(c[n]||''):'';
+  const holdEs=c?(c.holdLabelEs||'Próximamente'):'Próximamente';
+  const holdEn=c?(c.holdLabelEn||'Coming Soon'):'Coming Soon';
+
+  document.getElementById('modalContent').innerHTML=`
+    <button class="ef-back" onclick="renderAdminList()">← ${lang==='es'?'Volver':'Back'}</button>
+    <div class="modal-header" style="margin-bottom:16px">
+      <h2 class="modal-title">${id?(lang==='es'?'Editar Tarjeta':'Edit Card'):(lang==='es'?'Nueva Tarjeta':'New Card')}</h2>
+      <button class="modal-close" onclick="closeAdminModal()">×</button>
+    </div>
+    <div class="ef-scroll">
+      <div class="ef-grid">
+        <div class="ef-full"><div class="ef-label">${lang==='es'?'Ícono':'Icon'}</div><div class="emoji-picker">${emojiGrid}</div></div>
+        <div><div class="ef-label">${lang==='es'?'Nombre (ES)':'Name (ES)'}</div><input class="ef-input" id="ef_nameEs" value="${g('nameEs')}" placeholder="Nombre en español"/></div>
+        <div><div class="ef-label">${lang==='es'?'Nombre (EN)':'Name (EN)'}</div><input class="ef-input" id="ef_nameEn" value="${g('nameEn')}" placeholder="Name in English"/></div>
+        <div class="ef-full"><div class="ef-label">${lang==='es'?'Descripción (ES)':'Description (ES)'}</div><textarea class="ef-textarea" id="ef_descEs" placeholder="Descripción en español...">${g('descEs')}</textarea></div>
+        <div class="ef-full"><div class="ef-label">${lang==='es'?'Descripción (EN)':'Description (EN)'}</div><textarea class="ef-textarea" id="ef_descEn" placeholder="Description in English...">${g('descEn')}</textarea></div>
+        <div class="ef-full"><div class="ef-label">URL / Link</div><input class="ef-input" id="ef_url" value="${g('url')}" placeholder="https://... (${lang==='es'?'dejar vacío si no hay enlace':'leave empty if no link'})"/></div>
+        <div><div class="ef-label">${lang==='es'?'Etiqueta inactivo (ES)':'Inactive label (ES)'}</div><input class="ef-input" id="ef_holdEs" value="${esc(holdEs)}" placeholder="Próximamente"/></div>
+        <div><div class="ef-label">${lang==='es'?'Etiqueta inactivo (EN)':'Inactive label (EN)'}</div><input class="ef-input" id="ef_holdEn" value="${esc(holdEn)}" placeholder="Coming Soon"/></div>
+        <div class="ef-full"><div class="ef-label">Badge</div><div class="sel-row">${badgeRow}</div></div>
+        <div class="ef-full"><div class="ef-label">${lang==='es'?'Estado':'Status'}</div><div class="sel-row">${statusRow}</div></div>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-btn" onclick="renderAdminList()">${lang==='es'?'Cancelar':'Cancel'}</button>
+        <button class="modal-btn modal-btn-primary" onclick="saveCardEdit()">${lang==='es'?'Guardar':'Save'}</button>
+      </div>
+    </div>`;
 }
 
-function closeAdminModal(){
-  document.getElementById('adminModal').classList.remove('active');
+function selectIcon(emoji,btn){
+  selIcon=emoji;
+  document.querySelectorAll('.emoji-opt').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function selectBadge(val,btn){
+  selBadge=val;
+  btn.closest('.sel-row').querySelectorAll('.sel-opt').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function selectStatus(val,btn){
+  selStatus=val;
+  btn.closest('.sel-row').querySelectorAll('.sel-opt').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
 }
 
-function saveLinks(){
-  const newLinks={
-    gantt:document.getElementById('linkGantt').value||defaultLinks.gantt,
-    gapcheck:document.getElementById('linkGapcheck').value||defaultLinks.gapcheck,
-    bondline:document.getElementById('linkBondline').value||defaultLinks.bondline
+function saveCardEdit(){
+  const nameEs=document.getElementById('ef_nameEs').value.trim();
+  const nameEn=document.getElementById('ef_nameEn').value.trim();
+  if(!nameEs||!nameEn){alert(lang==='es'?'Ingresa el nombre en ambos idiomas.':'Enter the name in both languages.');return;}
+  const card={
+    id:editingId||('card_'+Date.now()),
+    icon:selIcon,nameEs,nameEn,
+    descEs:document.getElementById('ef_descEs').value.trim(),
+    descEn:document.getElementById('ef_descEn').value.trim(),
+    badge:selBadge,
+    url:document.getElementById('ef_url').value.trim(),
+    status:selStatus,
+    holdLabelEs:document.getElementById('ef_holdEs').value.trim()||'Próximamente',
+    holdLabelEn:document.getElementById('ef_holdEn').value.trim()||'Coming Soon'
   };
-  saveLinksToStorage(newLinks);
-  applyLinks();
-  closeAdminModal();
-  alert(lang==='es'?'Enlaces guardados exitosamente':'Links saved successfully');
+  let cards=getCards();
+  cards=editingId?cards.map(c=>c.id===editingId?card:c):[...cards,card];
+  saveCards(cards);renderCards();renderAdminList();
 }
 
-// Close modal with ESC key
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){
-    closeAdminModal();
+function toggleCardHold(id){
+  saveCards(getCards().map(c=>c.id===id?Object.assign({},c,{status:c.status==='active'?'hold':'active'}):c));
+  renderCards();renderAdminList();
+}
+
+// === EXPORT HTML (Opción A) ===
+async function exportHTML(){
+  try{
+    const res=await fetch(window.location.href);
+    if(!res.ok) throw new Error('fetch failed');
+    const html=await res.text();
+    const cards=getCards();
+    const cardsJSON=JSON.stringify(cards,null,2);
+    const replacement=`// __CARDS_START__\nconst DEFAULT_CARDS=${cardsJSON};\n// __CARDS_END__`;
+    const newHtml=html.replace(/\/\/ __CARDS_START__[\s\S]*?\/\/ __CARDS_END__/,replacement);
+    if(newHtml===html){
+      alert(lang==='es'?'No se encontró el marcador en el HTML. Verifica el archivo.':'Marker not found in HTML. Check the file.');
+      return;
+    }
+    const blob=new Blob([newHtml],{type:'text/html;charset=utf-8'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='CJLB_Toolbox_Dashboard.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+    alert(lang==='es'?'✅ HTML exportado. Sube el archivo a Netlify para aplicar los cambios.':'✅ HTML exported. Upload the file to Netlify to apply changes.');
+  }catch(e){
+    alert(lang==='es'?'⚠️ Error al exportar. Asegúrate de acceder desde el servidor (Netlify), no desde un archivo local.':'⚠️ Export failed. Make sure you\'re accessing from the server (Netlify), not a local file.');
   }
-});
+}
 
-// Init
-applyLanguage();
-applyTheme();
-updateDate();
-applyLinks();
+function confirmDeleteCard(id){
+  const c=getCards().find(x=>x.id===id);
+  const name=c?(lang==='es'?c.nameEs:c.nameEn):id;
+  if(confirm(lang==='es'?`¿Eliminar "${name}"? No se puede deshacer.`:`Delete "${name}"? This cannot be undone.`)){
+    saveCards(getCards().filter(c=>c.id!==id));
+    renderCards();renderAdminList();
+  }
+}
 
-// Update active states
-document.querySelectorAll('[data-lang]').forEach(el=>{
-  el.classList.toggle('active',el.getAttribute('data-lang')===lang);
-});
-document.querySelectorAll('[data-theme]').forEach(el=>{
-  el.classList.toggle('active',el.getAttribute('data-theme')===theme);
-});
-
-// Update date every minute
+// === INIT ===
+applyTheme();applyLanguage();updateDate();
+document.querySelectorAll('[data-lang]').forEach(el=>el.classList.toggle('active',el.getAttribute('data-lang')===lang));
+document.querySelectorAll('[data-theme]').forEach(el=>el.classList.toggle('active',el.getAttribute('data-theme')===theme));
 setInterval(updateDate,60000);
 </script>
 
