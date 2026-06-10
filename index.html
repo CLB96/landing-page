@@ -1336,6 +1336,12 @@ function openAdminModal(){document.getElementById('adminModal').classList.add('a
 function closeAdminModal(){document.getElementById('adminModal').classList.remove('active');editingId=null;}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAdminModal();});
 
+// === GITHUB CONFIG ===
+const GH_KEY='ghConfig';
+function getGHConfig(){try{return JSON.parse(localStorage.getItem(GH_KEY))||{}}catch(e){return{}}}
+function saveGHConfig(cfg){localStorage.setItem(GH_KEY,JSON.stringify(cfg))}
+function isGHConfigured(){const c=getGHConfig();return!!(c.token&&c.repo&&c.path)}
+
 // === CARD MANAGER STATE ===
 let editingId=null,selIcon='🔧',selBadge=null,selStatus='active';
 
@@ -1360,14 +1366,18 @@ function renderAdminList(){
       </div>
     </div>`;
   }).join('');
+  const ghOk=isGHConfigured();
+  const ghWarning=ghOk?'':`<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:rgba(239,91,103,.12);border:1px solid rgba(239,91,103,.3);font-size:12px;font-weight:700;color:#ef5b67;margin-bottom:8px;cursor:pointer" onclick="showGHConfig()">⚠ ${lang==='es'?'GitHub no configurado — click para configurar':'GitHub not configured — click to set up'}</div>`;
   document.getElementById('modalContent').innerHTML=`
     <div class="modal-header">
       <h2 class="modal-title">${lang==='es'?'Gestionar Tarjetas':'Manage Cards'}</h2>
       <button class="modal-close" onclick="closeAdminModal()">×</button>
     </div>
+    ${ghWarning}
     <div class="cm-list">${rows}</div>
     <button class="cm-add-btn" onclick="showCardEdit(null)">+ ${lang==='es'?'Agregar tarjeta':'Add card'}</button>
-    <button class="cm-export-btn" onclick="exportHTML()">⬇ ${lang==='es'?'Exportar HTML para Netlify':'Export HTML for Netlify'}</button>`;
+    <button class="cm-export-btn" onclick="publishToGitHub()" style="${ghOk?'border-color:var(--green);color:var(--green)':''}">🚀 ${lang==='es'?'Publicar en Vercel':'Publish to Vercel'}</button>
+    <button class="cm-export-btn" onclick="showGHConfig()" style="margin-top:4px;font-size:12px;opacity:.7">⚙ ${lang==='es'?'Configurar GitHub':'Configure GitHub'}</button>`;
 }
 
 // === CARD EDIT FORM ===
@@ -1455,31 +1465,101 @@ function toggleCardHold(id){
   renderCards();renderAdminList();
 }
 
-// === EXPORT HTML (Opción A) ===
-async function exportHTML(){
+// === GITHUB CONFIG UI ===
+function showGHConfig(){
+  const cfg=getGHConfig();
+  document.getElementById('modalContent').innerHTML=`
+    <button class="ef-back" onclick="renderAdminList()">← ${lang==='es'?'Volver':'Back'}</button>
+    <div class="modal-header" style="margin-bottom:16px">
+      <h2 class="modal-title">${lang==='es'?'Configurar GitHub':'Configure GitHub'}</h2>
+      <button class="modal-close" onclick="closeAdminModal()">×</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div>
+        <div class="ef-label">GitHub Token (repo scope)</div>
+        <input class="ef-input" id="gh_token" type="password" value="${cfg.token||''}" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"/>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:4px">${lang==='es'?'Settings → Developer settings → Personal access tokens → repo':'Settings → Developer settings → Personal access tokens → repo'}</div>
+      </div>
+      <div>
+        <div class="ef-label">${lang==='es'?'Repositorio (usuario/repo)':'Repository (user/repo)'}</div>
+        <input class="ef-input" id="gh_repo" value="${cfg.repo||'CLB96/landing-page'}" placeholder="CLB96/landing-page"/>
+      </div>
+      <div>
+        <div class="ef-label">${lang==='es'?'Ruta del archivo':'File path'}</div>
+        <input class="ef-input" id="gh_path" value="${cfg.path||'index.html'}" placeholder="index.html"/>
+      </div>
+      <div>
+        <div class="ef-label">Branch</div>
+        <input class="ef-input" id="gh_branch" value="${cfg.branch||'master'}" placeholder="master"/>
+      </div>
+      <div class="modal-actions" style="margin-top:8px">
+        <button class="modal-btn" onclick="renderAdminList()">${lang==='es'?'Cancelar':'Cancel'}</button>
+        <button class="modal-btn modal-btn-primary" onclick="saveGHConfigForm()">${lang==='es'?'Guardar':'Save'}</button>
+      </div>
+    </div>`;
+}
+
+function saveGHConfigForm(){
+  const token=document.getElementById('gh_token').value.trim();
+  const repo=document.getElementById('gh_repo').value.trim();
+  const path=document.getElementById('gh_path').value.trim();
+  const branch=document.getElementById('gh_branch').value.trim();
+  if(!token||!repo||!path){alert(lang==='es'?'Completa todos los campos.':'Fill in all fields.');return;}
+  saveGHConfig({token,repo,path,branch:branch||'master'});
+  renderAdminList();
+}
+
+// === PUBLISH TO GITHUB → VERCEL ===
+async function publishToGitHub(){
+  if(!isGHConfigured()){showGHConfig();return;}
+  const cfg=getGHConfig();
+  const btn=document.querySelector('.cm-export-btn');
+  const origText=btn?btn.innerHTML:'';
+  if(btn){btn.innerHTML=`⏳ ${lang==='es'?'Publicando...':'Publishing...'}`;btn.disabled=true;}
   try{
-    const res=await fetch(window.location.href);
-    if(!res.ok) throw new Error('fetch failed');
-    const html=await res.text();
+    const headers={
+      'Authorization':`Bearer ${cfg.token}`,
+      'Accept':'application/vnd.github+json',
+      'X-GitHub-Api-Version':'2022-11-28'
+    };
+    // 1. Obtener SHA actual del archivo
+    const apiUrl=`https://api.github.com/repos/${cfg.repo}/contents/${cfg.path}`;
+    const fileRes=await fetch(`${apiUrl}?ref=${cfg.branch}`,{headers});
+    if(!fileRes.ok) throw new Error(lang==='es'?`Error al leer archivo en GitHub (${fileRes.status})`:`Failed to read file on GitHub (${fileRes.status})`);
+    const fileData=await fileRes.json();
+    const sha=fileData.sha;
+    // 2. Obtener HTML actual de la página
+    const pageRes=await fetch(window.location.href);
+    if(!pageRes.ok) throw new Error(lang==='es'?'No se pudo obtener el HTML de la página':'Could not fetch page HTML');
+    const html=await pageRes.text();
+    // 3. Inyectar tarjetas actualizadas
     const cards=getCards();
     const cardsJSON=JSON.stringify(cards,null,2);
     const replacement=`// __CARDS_START__\nconst DEFAULT_CARDS=${cardsJSON};\n// __CARDS_END__`;
     const newHtml=html.replace(/\/\/ __CARDS_START__[\s\S]*?\/\/ __CARDS_END__/,replacement);
-    if(newHtml===html){
-      alert(lang==='es'?'No se encontró el marcador en el HTML. Verifica el archivo.':'Marker not found in HTML. Check the file.');
-      return;
+    if(newHtml===html) throw new Error(lang==='es'?'No se encontró el marcador __CARDS_START__ en el HTML':'Marker __CARDS_START__ not found in HTML');
+    // 4. Codificar en base64 (compatible con UTF-8)
+    const b64=btoa(unescape(encodeURIComponent(newHtml)));
+    // 5. Commit vía API
+    const commitRes=await fetch(apiUrl,{
+      method:'PUT',
+      headers:{...headers,'Content-Type':'application/json'},
+      body:JSON.stringify({
+        message:`chore: update tool cards [${new Date().toISOString().slice(0,10)}]`,
+        content:b64,
+        sha,
+        branch:cfg.branch
+      })
+    });
+    if(!commitRes.ok){
+      const err=await commitRes.json().catch(()=>({}));
+      throw new Error(err.message||`GitHub API error ${commitRes.status}`);
     }
-    const blob=new Blob([newHtml],{type:'text/html;charset=utf-8'});
-    const a=document.createElement('a');
-    a.href=URL.createObjectURL(blob);
-    a.download='CJLB_Toolbox_Dashboard.html';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(a.href);
-    alert(lang==='es'?'✅ HTML exportado. Sube el archivo a Netlify para aplicar los cambios.':'✅ HTML exported. Upload the file to Netlify to apply changes.');
+    if(btn){btn.innerHTML=`✅ ${lang==='es'?'¡Publicado! Vercel redesplegará en ~30s':'Published! Vercel will redeploy in ~30s'}`;btn.disabled=false;}
+    setTimeout(()=>{if(btn){btn.innerHTML=origText;btn.disabled=false;}},4000);
   }catch(e){
-    alert(lang==='es'?'⚠️ Error al exportar. Asegúrate de acceder desde el servidor (Netlify), no desde un archivo local.':'⚠️ Export failed. Make sure you\'re accessing from the server (Netlify), not a local file.');
+    if(btn){btn.innerHTML=origText;btn.disabled=false;}
+    alert(`❌ ${e.message}`);
   }
 }
 
